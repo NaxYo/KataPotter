@@ -32,8 +32,9 @@ describe('ShoppingCart', function() {
 
 		it('should be able to apply discount to two different books regardless of their order', function() {
 			var numberOfBooks = 2;
-			var discount      = .95;
-			var expectedPrice = (numberOfBooks*singleBookPrice)*discount;
+			var discount      = .05;
+			var expectedPrice = numberOfBooks*singleBookPrice;
+			expectedPrice -= expectedPrice*discount;
 
 			cart.addBook(2);
 			cart.addBook(1);
