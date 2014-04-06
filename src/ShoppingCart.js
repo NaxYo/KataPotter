@@ -13,20 +13,23 @@ ShoppingCart = (function() {
 
 	ShoppingCart.prototype.checkout = function() {
 		var discounts = [1, .95, .9, .8, .75];
-		var price = this.books.length*8;
-		
-		if(isSerie(this.books.sort()))
-			price *= discounts[this.books.length-1];
+		var price = 0;
+		var books = this.books.slice();
+
+		while(books.length) {
+			var serie = [];
+
+			for(var i=0; i<books.length; i++)
+				if(serie.indexOf(books[i])<0) {
+					serie.push(books[i]);
+					books.splice(i, 1);
+					i--;
+				}
+
+			price += 8*serie.length*discounts[serie.length-1];
+		}
 
 		return price;
-	}
-
-	function isSerie(booksList) {
-		for(var i = booksList.length-1; i>0; i--)
-			if(booksList[i]-1 == booksList[i-1])
-				return true;
-
-		return false;
 	}
 
 	return ShoppingCart;
