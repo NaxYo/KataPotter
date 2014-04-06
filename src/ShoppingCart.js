@@ -13,13 +13,19 @@ ShoppingCart = (function() {
 	}
 
 	ShoppingCart.prototype.checkout = function() {
-		var price = 0;
 		var books = this.books.slice();
+		var series = [];
 
-		while(books.length) {
-			var serie = popSerie.call(this, books);
-			price += getSeriePrice.call(this, serie);
-		}
+		while(books.length)
+			series.push(popSerie.call(this, books));
+
+		return getSeriesPrice.call(this, series);
+	}
+
+	function getSeriesPrice(series) {
+		var price = 0;
+		for(var i in series)
+			price += getSeriePrice.call(this, series[i]);
 
 		return price;
 	}
