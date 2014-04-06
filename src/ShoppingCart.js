@@ -13,13 +13,37 @@ ShoppingCart = (function() {
 	}
 
 	ShoppingCart.prototype.checkout = function() {
-		var books = this.books.slice();
-		var series = [];
+		return getBestPrice.call(this, [], this.books);
+	}
 
-		while(books.length)
-			series.push(popSerie.call(this, books));
+	function getBestPrice(currentSeries, restOfBooks) {
+		if(restOfBooks.length == 0)
+			return getSeriesPrice.call(this, currentSeries);
 
-		return getSeriesPrice.call(this, series);
+		var books = restOfBooks.slice();
+		var data  = [{ serie: popSerie(books), restOfBooks: books}];
+
+		while(data[data.length-1].serie.length>1) {
+			var obj   = data[data.length-1];
+			var serie = obj.serie.slice();
+			var books = obj.restOfBooks.slice();
+			books.push(serie.pop());
+			data.push({ serie: serie, restOfBooks: books });
+		}
+		
+		for(var i in data) {
+			var series = currentSeries.slice();
+			series.push(data[i].serie);
+
+			data[i].price = getBestPrice.call(this, series, data[i].restOfBooks);
+		}
+
+		var bestPrice = Infinity;
+		for(var i in data) {
+			bestPrice = data[i].price<bestPrice?data[i].price:bestPrice;
+		}
+		
+		return bestPrice;
 	}
 
 	function getSeriesPrice(series) {
