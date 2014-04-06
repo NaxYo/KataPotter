@@ -28,5 +28,18 @@ describe('ShoppingCart', function() {
 			var price = cart.checkout();
 			expect(price).toEqual(n*8);
 		});
+
+		it('should be able to apply discount to two different books in serie', function() {
+			var numberOfBooks = 2;
+			var discount      = .85;
+			var expectedPrice = (numberOfBooks*8)*discount;
+
+			cart.addBook(1);
+			cart.addBook(2);
+
+			var price = cart.checkout();
+
+			expect(price).toEqual(expectedPrice);
+		});
 	});
 });
