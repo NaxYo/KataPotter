@@ -1,26 +1,31 @@
-function ShoppingCart() {
-	this.books = [];
-}
+ShoppingCart = (function() {
+	function ShoppingCart() {
+		this.books = [];
+	}
 
-ShoppingCart.prototype.addBook = function(bookID) {
-	this.books.push(bookID);
-}
+	ShoppingCart.prototype.addBook = function(bookID) {
+		this.books.push(bookID);
+	}
 
-ShoppingCart.prototype.getNumberOfItems = function() {
-	return this.books.length;
-}
+	ShoppingCart.prototype.getNumberOfItems = function() {
+		return this.books.length;
+	}
 
-ShoppingCart.prototype.checkout = function() {
-	var price   = this.books.length*8;
-	var isSerie = false;
+	ShoppingCart.prototype.checkout = function() {
+		var price   = this.books.length*8;
+		if(isSerie(this.books.sort()))
+			price *= .95;
 
-	this.books = this.books.sort();
-	for(var i=this.books.length-1; i>0; i--)
-		if(this.books[i]-1 == this.books[i-1])
-			isSerie = true;
+		return price;
+	}
 
-	if(isSerie)
-		price *= .95;
+	function isSerie(booksList) {
+		for(var i=booksList.length-1; i>0; i--)
+			if(booksList[i]-1 == booksList[i-1])
+				return true;
 
-	return price;
-}
+		return false;
+	}
+
+	return ShoppingCart;
+})();
