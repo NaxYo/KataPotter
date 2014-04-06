@@ -48,5 +48,21 @@ describe('ShoppingCart', function() {
 			price = cart.checkout();
 			expect(price).toEqual(expectedPrice);
 		});
+
+		it('should be able to apply different discounts based on the number of books in the serie', function() {
+			var n = 5;
+			var price;
+			var expectedPrices = [8, 15.2, 21.6, 25.6, 30];
+
+			for(var i = 1; i<=n; i++) {
+				cart = new ShoppingCart;
+
+				for(var j = i; j>0; j--)
+					cart.addBook(j);
+
+				price = cart.checkout();
+				expect(price).toEqual(expectedPrices[i-1]);
+			}
+		});
 	});
 });
