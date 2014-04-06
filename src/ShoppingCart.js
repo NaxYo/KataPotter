@@ -14,6 +14,7 @@ ShoppingCart.prototype.checkout = function() {
 	var price   = this.books.length*8;
 	var isSerie = false;
 
+	this.books = this.books.sort();
 	for(var i=this.books.length-1; i>0; i--)
 		if(this.books[i]-1 == this.books[i-1])
 			isSerie = true;
