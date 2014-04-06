@@ -30,19 +30,6 @@ describe('ShoppingCart', function() {
 			expect(price).toEqual(n*singleBookPrice);
 		});
 
-		it('should be able to apply discount to two different books in serie', function() {
-			var numberOfBooks = 2;
-			var discount      = .95;
-			var expectedPrice = (numberOfBooks*singleBookPrice)*discount;
-
-			cart.addBook(1);
-			cart.addBook(2);
-
-			var price = cart.checkout();
-
-			expect(price).toEqual(expectedPrice);
-		});
-
 		it('should be able to apply discount to two different books regardless of their order', function() {
 			var numberOfBooks = 2;
 			var discount      = .95;
@@ -52,7 +39,13 @@ describe('ShoppingCart', function() {
 			cart.addBook(1);
 
 			var price = cart.checkout();
+			expect(price).toEqual(expectedPrice);
 
+			cart = new ShoppingCart;
+			cart.addBook(2);
+			cart.addBook(1);
+
+			price = cart.checkout();
 			expect(price).toEqual(expectedPrice);
 		});
 	});
