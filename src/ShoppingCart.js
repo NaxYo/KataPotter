@@ -12,5 +12,5 @@ ShoppingCart.prototype.getNumberOfItems = function() {
 }
 
 ShoppingCart.prototype.checkout = function() {
-	return 8;
+	return this.numberOfBooks*8;
 }
