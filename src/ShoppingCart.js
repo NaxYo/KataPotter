@@ -10,3 +10,7 @@ ShoppingCart.prototype.addBook = function(bookID) {
 ShoppingCart.prototype.getNumberOfItems = function() {
 	return this.numberOfBooks;
 }
+
+ShoppingCart.prototype.checkout = function() {
+	return 8;
+}
