@@ -12,4 +12,12 @@ describe('ShoppingCart', function() {
 
 		expect(cart.getNumberOfItems()).toEqual(n);
 	});
+
+	describe('Checkout', function() {
+		it('should be able to calculate the price of a single book', function() {
+			cart.addBook(1);
+			var price = cart.checkout();
+			expect(price).toEqual(8);
+		});
+	});
 });
