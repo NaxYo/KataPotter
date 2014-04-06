@@ -78,5 +78,21 @@ describe('ShoppingCart', function() {
 			var price = cart.checkout();
 			expect(price).toEqual(expectedPrice);
 		});
+
+		it('should be able to apply the best discount as possible', function() {
+			var expectedPrice = 51.2;
+			cart.addBook(2);
+			cart.addBook(1);
+			cart.addBook(3);
+
+			cart.addBook(2);
+			cart.addBook(1);
+			cart.addBook(3);
+			cart.addBook(4);
+			cart.addBook(5);
+
+			var price = cart.checkout();
+			expect(price).toEqual(expectedPrice);
+		});
 	});
 });
