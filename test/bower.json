@@ -1,8 +1,0 @@
-{
-  "name": "katapotter",
-  "version": "0.0.0",
-  "dependencies": {
-      "jasmine": "~2.0.0"
-  },
-  "devDependencies": {}
-}
