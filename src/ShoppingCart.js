@@ -12,15 +12,17 @@ ShoppingCart = (function() {
 	}
 
 	ShoppingCart.prototype.checkout = function() {
-		var price   = this.books.length*8;
+		var discounts = [1, .95, .9, .8, .75];
+		var price = this.books.length*8;
+		
 		if(isSerie(this.books.sort()))
-			price *= .95;
+			price *= discounts[this.books.length-1];
 
 		return price;
 	}
 
 	function isSerie(booksList) {
-		for(var i=booksList.length-1; i>0; i--)
+		for(var i = booksList.length-1; i>0; i--)
 			if(booksList[i]-1 == booksList[i-1])
 				return true;
 
