@@ -13,13 +13,13 @@ ShoppingCart.prototype.getNumberOfItems = function() {
 ShoppingCart.prototype.checkout = function() {
 	var price   = this.books.length*8;
 	var isSerie = false;
-	
+
 	for(var i=this.books.length-1; i>0; i--)
 		if(this.books[i]-1 == this.books[i-1])
 			isSerie = true;
 
 	if(isSerie)
-		price *= .85;
+		price *= .95;
 
 	return price;
 }
