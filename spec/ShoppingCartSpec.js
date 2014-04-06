@@ -20,10 +20,10 @@ describe('ShoppingCart', function() {
 			expect(price).toEqual(8);
 		});
 
-		it('should be able to calculate the price of N different books', function() {
+		it('should be able to calculate the price of N same books', function() {
 			var n = 5;
 			for(var i = 1; i<=n; i++)
-				cart.addBook(i);
+				cart.addBook(1);
 
 			var price = cart.checkout();
 			expect(price).toEqual(n*8);
